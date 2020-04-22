@@ -5,6 +5,7 @@
 #include <DNSServer.h>
 #include <ESP8266WebServer.h>
 #include <WiFiManager.h> //https://github.com/tzapu/WiFiManager
+#include <ESP8266HTTPClient.h>
 
 // defining pins.
 #define trigger D0
@@ -37,19 +38,25 @@ void loop()
 {
   if (WiFi.status() == WL_CONNECTED)
   {
-    //digitalWrite(power,LOW);
-    Serial.println("power is LOW");
-    while (WiFi.status() == WL_CONNECTED)
+    Serial.println("Wifi Connected...");
+    HTTPClient http;                                           //Declare an object of class HTTPClient
+    http.begin("http://jsonplaceholder.typicode.com/users/1"); //Specify request destination
+    int httpCode = http.GET();                                 //Send the request
+    Serial.printf("HTTP GET ... code: %d\n", httpCode);
+    if (httpCode > 0)
     {
-      //digitalWrite(LED,HIGH);
-      Serial.println("led is HIGH");
-      delay(500);
-      //digitalWrite(LED,LOW);
+      String payload = http.getString(); //Get the request response payload
+      Serial.println(payload);           //Print the response payload
     }
+    else
+    {
+      Serial.printf("HTTP GET failed, error: %s\n", http.errorToString(httpCode).c_str());
+    }
+    http.end(); //Close connection
   }
   else
   {
-    Serial.println("led is LOW");
-    digitalWrite(LED, LOW);
+    Serial.println("Wifi Disconnected...");
   }
+  delay(30000); //Send a request every 30 seconds
 }

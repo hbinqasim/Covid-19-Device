@@ -4,6 +4,7 @@
 // https://techtutorialsx.com/2016/07/17/esp8266-http-get-requests/
 // https://www.arduino.cc/en/Tutorial/HttpClient
 // https://gist.github.com/yutashi/1313444a3173e835c33602b7c8c25f24
+// https://circuits4you.com/2019/01/10/esp8266-nodemcu-https-secured-get-request/
 
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
