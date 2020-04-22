@@ -12,7 +12,7 @@
 
 ## Arduino
 
-- [ ] Wifi Connection
+- [x] Wifi Connection
 - [ ] Make server requests via http protocol
 - [ ] Read MPU6050 raw values,
 - [ ] Processing => Detecting movment for certain time(threshold).
@@ -27,3 +27,5 @@
 ## Mobile
 
 ## Useful Links
+
+- [wifi connection](https://circuitdigest.com/microcontroller-projects/using-wifi-manager-on-nodemcu-to-scan-and-connect-wifi-networks)
