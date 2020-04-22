@@ -13,7 +13,7 @@
 ## Arduino
 
 - [x] Wifi Connection
-- [ ] Make server requests via http protocol
+- [x] Make server requests via http protocol
 - [ ] Read MPU6050 raw values,
 - [ ] Processing => Detecting movment for certain time(threshold).
 - [ ] Generate Alarm or bink led, or print to serial. if movment detected
@@ -29,3 +29,4 @@
 ## Useful Links
 
 - [wifi connection](https://circuitdigest.com/microcontroller-projects/using-wifi-manager-on-nodemcu-to-scan-and-connect-wifi-networks)
+- [http get request](https://techtutorialsx.com/2016/07/17/esp8266-http-get-requests/)
