@@ -1,6 +1,14 @@
 import React from "react";
+import { Link, useHistory } from "react-router-dom";
 
 const Login = () => {
+  const history = useHistory();
+
+  const onClick = (ev) => {
+    ev.preventDefault();
+    console.log("clicked login");
+    history.push("/dashboard");
+  }
   return (
     <div className="container my-5">
       <h1 className="display-4 text-center my-5"> Login</h1>
@@ -26,7 +34,7 @@ const Login = () => {
                   ></input>
                 </div>
                 <br></br>
-                <button className="btn btn-dark btn-lg btn-block">
+                <button onClick={(e) => { onClick(e) }} className="btn btn-dark btn-lg btn-block">
                   Sign up
                 </button>
               </form>
@@ -34,7 +42,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 export default Login;
