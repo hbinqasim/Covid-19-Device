@@ -24,7 +24,46 @@
 
 ## Server
 
-## Mobile
+- [ ] Database Schema
+- [ ] Api and Routing
+- [ ] Controllers
+- [ ] Authentication
+
+### Model
+
+```bash
+User:
+Name:
+CNIC:
+Age:
+Address:
+Contact:
+Registered location:
+Device: {id of device, alloted by the hospital admin}
+Status: {disconnected, normal, outOfBound }
+Guardian Name:
+Emergency contact:
+Email:
+```
+
+```bash
+Hospital Name:
+Address:
+Admin Name:
+Admin CNIC:
+Admin contact:
+Devices: { list of device ids provided to hospital, configured and unconfigured }
+Email:
+Password:
+
+```
+
+## FrontEnd
+
+- [ ] Dashboard
+- [ ] google Maps integration
+- [x] signup page
+- [x] patient registration page
 
 ## Useful Links
 

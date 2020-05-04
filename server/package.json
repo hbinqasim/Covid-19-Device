@@ -1,0 +1,18 @@
+{
+  "name": "covid-19-device-backend",
+  "version": "1.0.0",
+  "description": "The purpose of Tracking and Monitoring System for Covid-19 Patients is to restrict the movement of the patient in the quarantine centre and movement of the patient is to be monitored by the Hospital Admin or the incharge via an admin portal on a Web App, the data of the movements will be received from a device having NodeMCU+WIFI and MPU6050 weared by the patient himself as an armband. This device will be transferring data to the server via WIFI and will be shown to the admin on a Web App. This way, the patient can be monitored all the time and his movements can be restricted as wanted.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "author": "Hashir Shoaib",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  }
+}
