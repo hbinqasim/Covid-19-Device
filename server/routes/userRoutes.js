@@ -1,7 +1,15 @@
-const c = require(`${__dirname}/../controllers/userControllers`);
 const express = require("express");
 const userRouter = express.Router();
 
-userRouter.route("/").get(c.getAllUsers);
+const {
+  getAllUsers,
+  getUser,
+  createUser,
+  updateUser,
+  deleteUser,
+} = require(`${__dirname}/../controllers/userControllers`);
+
+userRouter.route("/").get(getAllUsers).post(createUser);
+userRouter.route("/:id").get(getUser).patch(updateUser).delete(deleteUser);
 
 module.exports = userRouter;

@@ -31,6 +31,8 @@
 
 ### Model
 
+data format json
+
 ```bash
 User:
 Name:

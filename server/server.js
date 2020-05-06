@@ -1,3 +1,4 @@
 const app = require(`${__dirname}/app.js`);
 
-app.listen(3000);
+const PORT = 3000;
+app.listen(PORT, () => console.log(`App RUNNING on PORT: ${PORT}`));
