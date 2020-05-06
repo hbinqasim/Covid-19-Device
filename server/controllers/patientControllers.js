@@ -1,14 +1,16 @@
 const fs = require("fs");
-const tempdata = JSON.parse(fs.readFileSync(`${__dirname}/../data/users.json`));
+const tempdata = JSON.parse(
+  fs.readFileSync(`${__dirname}/../data/patients.json`)
+);
 
-exports.getAllUsers = (req, res) => {
+exports.getAllPatients = (req, res) => {
   res.status(200).json({
     status: "success",
     data: "<All TEMPORARY>",
   });
 };
 
-exports.getUser = (req, res) => {
+exports.getPatient = (req, res) => {
   console.log(req.params);
   res.status(200).json({
     status: "success",
@@ -16,7 +18,7 @@ exports.getUser = (req, res) => {
   });
 };
 
-exports.createUser = (req, res) => {
+exports.createPatient = (req, res) => {
   console.log(req.body);
   res.status(200).json({
     status: "success",
@@ -24,7 +26,7 @@ exports.createUser = (req, res) => {
   });
 };
 
-exports.updateUser = (req, res) => {
+exports.updatePatient = (req, res) => {
   console.log(req.body);
   res.status(200).json({
     status: "success",
@@ -32,7 +34,7 @@ exports.updateUser = (req, res) => {
   });
 };
 
-exports.deleteUser = (req, res) => {
+exports.deletePatient = (req, res) => {
   console.log(req.body);
   res.status(200).json({
     status: "success",
