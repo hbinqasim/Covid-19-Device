@@ -77,3 +77,11 @@ Password:
 In navigation, dead reckoning is the process of calculating one's current position by using a previously determined position, or fix, and advancing that position based upon known or estimated speeds over elapsed time and course. The corresponding term in biology, used to describe the processes by which animals update their estimates of position or heading, is path integration.
 link for Gait tracking
 https://x-io.co.uk/gait-tracking-with-x-imu/
+
+## Database connection issue
+
+[Link](https://stackoverflow.com/questions/56237646/exception-in-initandlisten-nonexistentpath-data-directory-data-db-not-found)
+
+```bash
+  mongod --dbpath /System/Volumes/Data/data/db
+```
