@@ -1,7 +1,5 @@
 const fs = require("fs");
-const tempdata = JSON.parse(
-  fs.readFileSync(`${__dirname}/../data/patients.json`)
-);
+const PatientModel = require(`${__dirname}/../models/patientModels.js`);
 
 exports.getAllPatients = (req, res) => {
   res.status(200).json({
