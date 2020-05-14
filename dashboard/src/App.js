@@ -6,13 +6,14 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
 import Register from "./components/Register";
+import GoogleMap from "./components/Map";
 
 function App() {
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL + "/"}>
       <div>
         <Route path="/" exact component={Login} />
-        <Route path="/dashboard" component={Dashboard} />
+        <Route path="/dashboard" component={GoogleMap} />
         <Route path="/add" component={Register} />
       </div>
     </BrowserRouter>
