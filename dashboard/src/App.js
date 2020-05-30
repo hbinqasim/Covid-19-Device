@@ -6,7 +6,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
 import Register from "./components/Register";
-import GoogleMap from "./components/Map";
+import GoogleMap from "./components/map/Map";
 
 function App() {
   return (
