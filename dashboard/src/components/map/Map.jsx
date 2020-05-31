@@ -36,7 +36,7 @@ const MapContainer = (props) => {
       onReady={(mapProps, map) => _mapLoaded(mapProps, map)}
     >
       {locations.map((value, index) => {
-        return <Marker position={value}></Marker>;
+        return <Marker key={index} position={value}></Marker>;
       })}
     </Map>
   );
