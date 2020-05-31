@@ -5,12 +5,12 @@ import { Link, useHistory } from "react-router-dom";
 // CNIC:
 // Age:
 // Address:
-// Contact: 
+// Contact:
 // Registered location:
 // Device: {id of device, alloted by the hospital admin}
 // Status: {disconnected, normal, outOfBound }
 // Guardian Name:
-// Emergency contact: 
+// Emergency contact:
 // Email:
 
 const Register = () => {
@@ -20,8 +20,7 @@ const Register = () => {
     ev.preventDefault();
     console.log("clicked register");
     history.push("/dashboard");
-  }
-
+  };
   return (
     <div className="container my-5">
       <h1 className="display-4 text-center my-5"> Patient Registration Form</h1>
@@ -48,7 +47,7 @@ const Register = () => {
                     placeholder="00000-0000000-0"
                   ></input>
                 </div>
-                {/* CNIC */}
+                {/* Age */}
                 <div className="form-group">
                   <label>Age:</label>
                   <input
@@ -66,6 +65,16 @@ const Register = () => {
                     placeholder="Lahore, Pakistan"
                   ></input>
                 </div>
+                {/* Phone Number */}
+                <div className="form-group">
+                  <label>Phone Number:</label>
+                  <input
+                    type="tel"
+                    className="form-control "
+                    placeholder="+92-311-999-9999"
+                  ></input>
+                </div>
+                {/* Password */}
                 <div className="form-group">
                   <label>Password:</label>
                   <input
