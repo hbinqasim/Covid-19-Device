@@ -18,10 +18,19 @@ exports.getPatient = (req, res) => {
 
 exports.createPatient = (req, res) => {
   console.log(req.body);
-  res.status(200).json({
-    status: "success",
-    data: "<CREATE TEMPORARY>",
-  });
+  PatientModel.create(req.body)
+    .then((value) => {
+      res.status(200).json({
+        status: "success",
+        data: value,
+      });
+    })
+    .catch((reason) => {
+      res.status(400).json({
+        status: "fail",
+        data: reason,
+      });
+    });
 };
 
 exports.updatePatient = (req, res) => {
