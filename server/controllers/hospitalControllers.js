@@ -1,7 +1,4 @@
-const fs = require("fs");
-const tempdata = JSON.parse(
-  fs.readFileSync(`${__dirname}/../data/hospitals.json`)
-);
+const hospitalModel = require(`${__dirname}/../models/hospitalModels`);
 
 exports.getAllHospitals = (req, res) => {
   res.status(200).json({
@@ -20,10 +17,20 @@ exports.getHospital = (req, res) => {
 
 exports.createHospital = (req, res) => {
   console.log(req.body);
-  res.status(200).json({
-    status: "success",
-    data: "<CREATE TEMPORARY>",
-  });
+  hospitalModel
+    .create(req.body)
+    .then((value) => {
+      res.status(200).json({
+        status: "success",
+        data: value,
+      });
+    })
+    .catch((reason) => {
+      res.status(400).json({
+        status: "fail",
+        data: reason,
+      });
+    });
 };
 
 exports.updateHospital = (req, res) => {
