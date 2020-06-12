@@ -1,6 +1,9 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
-
+import { useContext } from "react";
+import { useEffect } from "react";
+import "axios";
+import Axios from "axios";
 
 const Dashboard = () => {
   const history = useHistory();
@@ -9,11 +12,26 @@ const Dashboard = () => {
     ev.preventDefault();
     console.log("clicked add");
     history.push("/add");
-  }
+  };
+
+  useEffect(() => {
+    Axios.get(`${process.env.REACT_APP_SRV_URL}/patients`)
+      .then((value) => {
+        console.log(value);
+      })
+      .catch((reason) => {
+        console.log(reason);
+      });
+  }, []);
   return (
     <div className="container-fluid">
       <h1 className="text-center my-2">Welcome</h1>
-      <button onClick={(e) => { onClick(e) }} className="btn btn-outline-dark btn-lg my-2">
+      <button
+        onClick={(e) => {
+          onClick(e);
+        }}
+        className="btn btn-outline-dark btn-lg my-2"
+      >
         Add +
       </button>
       <table className="table">
@@ -46,6 +64,7 @@ const Dashboard = () => {
           </tr>
         </tbody>
       </table>
-    </div>);
+    </div>
+  );
 };
 export default Dashboard;

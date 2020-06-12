@@ -13,7 +13,8 @@ function App() {
     <BrowserRouter basename={process.env.PUBLIC_URL + "/"}>
       <div>
         <Route path="/" exact component={Login} />
-        <Route path="/dashboard" component={GoogleMap} />
+        <Route path="/dashboard" component={Dashboard} />
+        <Route path="/map" component={GoogleMap} />
         <Route path="/add" component={Register} />
       </div>
     </BrowserRouter>
