@@ -1,5 +1,8 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
+import "axios";
+import { useState } from "react";
+import Axios from "axios";
 
 // Name:
 // CNIC:
@@ -15,11 +18,30 @@ import { Link, useHistory } from "react-router-dom";
 
 const Register = () => {
   const history = useHistory();
+  const [name, setName] = useState("");
+  const [cnic, setCnic] = useState("");
+  const [age, setAge] = useState("");
+  const [address, setAddress] = useState("");
+  const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
 
   const onClick = (ev) => {
     ev.preventDefault();
-    console.log("clicked register");
-    history.push("/dashboard");
+    console.log({ name, cnic, age, address, phone, password });
+    Axios.post(`${process.env.REACT_APP_SRV_URL}/api/v1/hospitals`, {
+      name: name,
+      CNIC: cnic,
+      address: address,
+      contact: phone,
+    })
+      .then((value) => {
+        console.log(value);
+      })
+      .catch((reason) => {
+        console.log(reason);
+      });
+
+    // history.push("/dashboard");
   };
   return (
     <div className="container my-5">
@@ -36,6 +58,8 @@ const Register = () => {
                     type="text"
                     className="form-control "
                     placeholder="John Doe"
+                    value={name}
+                    onChange={(event) => setName(event.target.value)}
                   ></input>
                 </div>
                 {/* CNIC */}
@@ -45,6 +69,8 @@ const Register = () => {
                     type="text"
                     className="form-control "
                     placeholder="00000-0000000-0"
+                    value={cnic}
+                    onChange={(event) => setCnic(event.target.value)}
                   ></input>
                 </div>
                 {/* Age */}
@@ -54,6 +80,8 @@ const Register = () => {
                     type="number"
                     className="form-control "
                     placeholder="00"
+                    value={age}
+                    onChange={(event) => setAge(event.target.value)}
                   ></input>
                 </div>
                 {/* Address */}
@@ -63,6 +91,8 @@ const Register = () => {
                     type="text"
                     className="form-control "
                     placeholder="Lahore, Pakistan"
+                    value={address}
+                    onChange={(event) => setAddress(event.target.value)}
                   ></input>
                 </div>
                 {/* Phone Number */}
@@ -72,6 +102,8 @@ const Register = () => {
                     type="tel"
                     className="form-control "
                     placeholder="+92-311-999-9999"
+                    value={phone}
+                    onChange={(event) => setPhone(event.target.value)}
                   ></input>
                 </div>
                 {/* Password */}
@@ -81,10 +113,15 @@ const Register = () => {
                     type="password"
                     className="form-control "
                     placeholder="Password"
+                    value={password}
+                    onChange={(event) => setPassword(event.target.value)}
                   ></input>
                 </div>
                 <br></br>
-                <button className="btn btn-dark btn-lg btn-block">
+                <button
+                  className="btn btn-dark btn-lg btn-block"
+                  onClick={onClick}
+                >
                   Sign up
                 </button>
               </form>
