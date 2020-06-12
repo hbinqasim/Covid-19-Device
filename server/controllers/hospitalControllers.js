@@ -1,3 +1,4 @@
+const fs = require("fs");
 const hospitalModel = require(`${__dirname}/../models/hospitalModels`);
 
 exports.getAllHospitals = (req, res) => {
