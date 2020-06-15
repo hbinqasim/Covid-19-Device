@@ -2,10 +2,20 @@ const fs = require("fs");
 const PatientModel = require(`${__dirname}/../models/patientModels.js`);
 
 exports.getAllPatients = (req, res) => {
-  res.status(200).json({
-    status: "success",
-    data: "<All TEMPORARY>",
-  });
+  PatientModel.find()
+    .then((value) => {
+      res.status(200).json({
+        status: "success",
+        result: value.length,
+        data: value,
+      });
+    })
+    .catch((reason) => {
+      res.status(404).json({
+        status: "fail",
+        data: reason,
+      });
+    });
 };
 
 exports.getPatient = (req, res) => {
