@@ -2,10 +2,21 @@ const fs = require("fs");
 const hospitalModel = require(`${__dirname}/../models/hospitalModels`);
 
 exports.getAllHospitals = (req, res) => {
-  res.status(200).json({
-    status: "success",
-    data: "<All TEMPORARY>",
-  });
+  hospitalModel
+    .find()
+    .then((value) => {
+      res.status(200).json({
+        status: "success",
+        result: value.length,
+        data: value,
+      });
+    })
+    .catch((reason) => {
+      res.status(404).json({
+        status: "fail",
+        data: reason,
+      });
+    });
 };
 
 exports.getHospital = (req, res) => {
