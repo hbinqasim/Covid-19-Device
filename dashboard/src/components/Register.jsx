@@ -28,7 +28,7 @@ const Register = () => {
   const onClick = (ev) => {
     ev.preventDefault();
     console.log({ name, cnic, age, address, phone, password });
-    Axios.post(`${process.env.REACT_APP_SRV_URL}/hospitals`, {
+    Axios.post(`${process.env.REACT_APP_SRV_URL}/patients`, {
       name: name,
       CNIC: cnic,
       address: address,
