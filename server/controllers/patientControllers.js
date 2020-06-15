@@ -19,11 +19,19 @@ exports.getAllPatients = (req, res) => {
 };
 
 exports.getPatient = (req, res) => {
-  console.log(req.params);
-  res.status(200).json({
-    status: "success",
-    data: "<ONE TEMPORARY>",
-  });
+  PatientModel.findById(req.params.id)
+    .then((value) => {
+      res.status(200).json({
+        status: "success",
+        data: value,
+      });
+    })
+    .catch((reason) => {
+      res.status(404).json({
+        status: "fail",
+        data: reason,
+      });
+    });
 };
 
 exports.createPatient = (req, res) => {
