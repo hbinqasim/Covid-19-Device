@@ -43,6 +43,19 @@ const Register = () => {
 
     // history.push("/dashboard");
   };
+
+  const getLocation = (ev) => {
+    ev.preventDefault();
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        console.log(position);
+      },
+      (error) => {
+        console.log(error);
+      },
+      { enableHighAccuracy: true }
+    );
+  };
   return (
     <div className="container my-5">
       <h1 className="display-4 text-center my-5"> Patient Registration Form</h1>
@@ -94,6 +107,13 @@ const Register = () => {
                     value={address}
                     onChange={(event) => setAddress(event.target.value)}
                   ></input>
+                </div>
+                {/* Location */}
+                <div className="form-group">
+                  <label>Quarantine Location: </label>
+                  <button className="btn btn-secondary" onClick={getLocation}>
+                    Current Location
+                  </button>
                 </div>
                 {/* Phone Number */}
                 <div className="form-group">
