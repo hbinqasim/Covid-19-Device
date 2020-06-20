@@ -24,15 +24,17 @@ const Register = () => {
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
+  const [cordinates, setCordinates] = useState({ lat: 0, long: 0 });
 
   const onClick = (ev) => {
     ev.preventDefault();
-    console.log({ name, cnic, age, address, phone, password });
+    console.log({ name, cnic, age, address, phone, password, cordinates });
     Axios.post(`${process.env.REACT_APP_SRV_URL}/patients`, {
       name: name,
       CNIC: cnic,
       address: address,
       contact: phone,
+      location: cordinates,
     })
       .then((value) => {
         console.log(value);
@@ -48,7 +50,8 @@ const Register = () => {
     ev.preventDefault();
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        console.log(position);
+        const coords = position.coords;
+        setCordinates({ lat: coords.latitude, long: coords.longitude });
       },
       (error) => {
         console.log(error);
