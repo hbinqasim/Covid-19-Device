@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Allah Chala De</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="get_data">Get Data</string>
+    <string name="response_get_data">Response Get Data:</string>
+    <string name="post_data">Post Data</string>
+    <string name="response_post_data">Response Post Data:</string>
+</resources>
