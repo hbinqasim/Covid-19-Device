@@ -7,6 +7,7 @@ const patientSchema = new mongoose.Schema({
   address: { type: String },
   contact: { type: String },
   email: { type: String },
+  location: { lat: Number, long: Number },
 });
 
 const Patient = mongoose.model("Patient", patientSchema);
