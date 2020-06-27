@@ -53,10 +53,21 @@ exports.createPatient = (req, res) => {
 
 exports.updatePatient = (req, res) => {
   console.log(req.body);
-  res.status(200).json({
-    status: "success",
-    data: "<UPDATE TEMPORARY>",
-  });
+  const data = { current_location: req.body };
+  PatientModel.findByIdAndUpdate(req.params.id, data, { new: true })
+    .then((value) => {
+      const { current_location } = value;
+      res.status(200).json({
+        status: "success",
+        data: current_location,
+      });
+    })
+    .catch((reason) => {
+      res.status(400).json({
+        status: "fail",
+        data: reason,
+      });
+    });
 };
 
 exports.deletePatient = (req, res) => {
