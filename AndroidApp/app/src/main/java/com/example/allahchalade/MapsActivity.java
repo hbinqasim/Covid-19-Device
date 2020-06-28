@@ -67,11 +67,11 @@ import java.util.Map;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMapLongClickListener {
 
     private static final String TAG = "MapsActivity";
-    private float GEOFENCE_RADIUS = 500;
+    private float GEOFENCE_RADIUS = 200;
     private int FINE_LOCATION_ACCESS_REQUEST_CODE = 10001;
     private int BACKGROUND_LOCATION_ACCESS_REQUEST_CODE = 10002;
 
-    private String GEOFENCE_ID = "SOME_GEOFENCE_ID2";
+    private String GEOFENCE_ID = "SOME_GEOFENCE_ID21";
     private GoogleMap mMap;
     private GeofencingClient geofencingClient;
     private GeofenceHelper geofenceHelper;
@@ -112,6 +112,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     // ...
 
                     userloc = new LatLng(location.getLatitude(),location.getLongitude());
+                    postData();
                     Log.d("CONTINIOUSLOC: ", location.toString());
                 }
             };
@@ -139,7 +140,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         bt_Post_req.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                postData();
+                if(userloc!=null)
+                {
+                    postData();
+                }
             }
         });
     }
@@ -248,6 +252,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 // All location settings are satisfied. The client can initialize
                 // location requests here.
                 startLocationUpdates();
+
             } else {
                 checkLocationSetting(builder);
             }
@@ -265,12 +270,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 //                                          int[] grantResults)
                 // to handle the case where the user grants the permission. See the documentation
                 // for Activity#requestPermissions for more details.
+
                 return;
             }
-        }
-        if(userloc!=null)
-        {
-            postData();
         }
         fusedLocationClient.requestLocationUpdates(mLocationRequest,
                 mlocationCallback,
@@ -295,7 +297,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             e.printStackTrace();
         }
         // Enter the correct url for your api service site
-        String url = "http://192.168.1.104:4000/api/v1/patients/5eee3472b18c7cdb2ebe6f1d";
+        String url = getString(R.string.Server_ip);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.PATCH, url, object,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -315,7 +317,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private void getRequest() {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://192.168.1.104:4000/api/v1/patients/5eee3472b18c7cdb2ebe6f1d";
+        String url = getString(R.string.Get_Server_Ip);
         Log.d(TAG,"in getRequest()");
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override

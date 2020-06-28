@@ -5,4 +5,7 @@
     <string name="response_get_data">Response Get Data:</string>
     <string name="post_data">Post Data</string>
     <string name="response_post_data">Response Post Data:</string>
+    <string name="Server_Ip">http://192.168.10.4:4000/api/v1/patients/5eee3472b18c7cdb2ebe6f1d</string>
+    <string name="Server_ip">http://192.168.10.4:4000/api/v1/patients/5eee3472b18c7cdb2ebe6f1d</string>
+    <string name="Get_Server_Ip">http://192.168.10.4:4000/api/v1/patients/5eee3472b18c7cdb2ebe6f1d</string>
 </resources>
