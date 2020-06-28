@@ -9,6 +9,7 @@ const patientSchema = new mongoose.Schema({
   email: { type: String },
   location: { lat: Number, long: Number },
   current_location: { lat: Number, long: Number },
+  status: { type: String },
 });
 
 const Patient = mongoose.model("Patient", patientSchema);

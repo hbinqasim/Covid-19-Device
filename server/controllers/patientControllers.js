@@ -53,7 +53,15 @@ exports.createPatient = (req, res) => {
 
 exports.updatePatient = (req, res) => {
   console.log(req.body);
-  const data = { current_location: req.body };
+  const { lat, long, status } = req.body;
+
+  let data = {};
+  if (!status) {
+    data = { current_location: { lat: lat, long: long } };
+  } else {
+    data = { status: status };
+  }
+
   PatientModel.findByIdAndUpdate(req.params.id, data, { new: true })
     .then((value) => {
       const { current_location } = value;
