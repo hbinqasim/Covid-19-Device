@@ -52,18 +52,15 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver {
 
         switch (transitionType) {
             case Geofence.GEOFENCE_TRANSITION_ENTER:
-                Toast.makeText(context, "GEOFENCE_TRANSITION_ENTER", Toast.LENGTH_SHORT).show();
-                notificationHelper.sendHighPriorityNotification("GEOFENCE_TRANSITION_ENTER", "", MapsActivity.class);
+                notificationHelper.sendHighPriorityNotification("Quarantined", "You are Quarentined for 21 days", MapsActivity.class);
                 postData("Enter",context);
                 break;
             case Geofence.GEOFENCE_TRANSITION_DWELL:
-                Toast.makeText(context, "GEOFENCE_TRANSITION_DWELL", Toast.LENGTH_SHORT).show();
-                notificationHelper.sendHighPriorityNotification("GEOFENCE_TRANSITION_DWELL", "", MapsActivity.class);
+                notificationHelper.sendHighPriorityNotification("In Quarantine Area ", "Keep Roaming in the Area", MapsActivity.class);
                 postData("Dwelling",context);
                 break;
             case Geofence.GEOFENCE_TRANSITION_EXIT:
-                Toast.makeText(context, "GEOFENCE_TRANSITION_EXIT", Toast.LENGTH_SHORT).show();
-                notificationHelper.sendHighPriorityNotification("GEOFENCE_TRANSITION_EXIT", "", MapsActivity.class);
+                notificationHelper.sendHighPriorityNotification("Left Quarantine", "You have left the Quarantine, we have notified the admin", MapsActivity.class);
                 postData("Exit",context);
                 break;
         }

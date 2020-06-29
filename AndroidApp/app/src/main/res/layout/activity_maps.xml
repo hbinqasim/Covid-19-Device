@@ -9,35 +9,24 @@
     tools:context=".MapsActivity">
 
     <Button
+        android:id="@+id/btn_get_request"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_get_request"
-        android:text="@string/get_data"/>
+        android:background="#2196F3"
+        android:text="@string/get_data"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/tv_get_request"
-        android:text="@string/response_get_data"
         android:layout_below="@+id/btn_get_request"/>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btn_post_request"
-        android:text="@string/post_data"
-        android:layout_below="@+id/tv_get_request"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_post_request"
-        android:text="@string/response_post_data"
-        android:layout_below="@+id/btn_post_request"/>
-
     <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/tv_post_request"/>
+        android:layout_below="@+id/tv_get_request"/>
 
 
 </RelativeLayout>

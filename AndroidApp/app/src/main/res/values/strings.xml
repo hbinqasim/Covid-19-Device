@@ -1,11 +1,22 @@
 <resources>
-    <string name="app_name">Allah Chala De</string>
-    <string name="title_activity_maps">Map</string>
-    <string name="get_data">Get Data</string>
+    <string name="app_name">MoTrack</string>
+    <string name="title_activity_maps">MoTrack</string>
+    <string name="get_data">Get Quarantine Area</string>
     <string name="response_get_data">Response Get Data:</string>
     <string name="post_data">Post Data</string>
     <string name="response_post_data">Response Post Data:</string>
-    <string name="Server_Ip">http://192.168.10.4:4000/api/v1/patients/5eee3472b18c7cdb2ebe6f1d</string>
-    <string name="Server_ip">http://192.168.10.4:4000/api/v1/patients/5eee3472b18c7cdb2ebe6f1d</string>
-    <string name="Get_Server_Ip">http://192.168.10.4:4000/api/v1/patients/5eee3472b18c7cdb2ebe6f1d</string>
+    <string name="Server_Ip">http://192.168.1.106:4000/api/v1/patients/5ef9d867007a59293bcee04f</string>
+    <string name="Server_ip">http://192.168.1.106:4000/api/v1/patients/5ef9d867007a59293bcee04f</string>
+    <string name="Get_Server_Ip">http://192.168.1.106:4000/api/v1/patients/5ef9d867007a59293bcee04f</string>
+    <string name="title_activity_login">MoTrack</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="Messageofquarantine">Quarantine area marked, When you will enter the area you will be quarentined for 21 days, if you leave the specified area, we will</string>
+    <string name="message2">notify the Hospital admin and assigned Doctor</string>
 </resources>

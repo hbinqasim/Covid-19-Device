@@ -67,7 +67,7 @@ import java.util.Map;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMapLongClickListener {
 
     private static final String TAG = "MapsActivity";
-    private float GEOFENCE_RADIUS = 200;
+    private float GEOFENCE_RADIUS = 20;
     private int FINE_LOCATION_ACCESS_REQUEST_CODE = 10001;
     private int BACKGROUND_LOCATION_ACCESS_REQUEST_CODE = 10002;
 
@@ -77,9 +77,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GeofenceHelper geofenceHelper;
 
     private Button bt_Get_req;
-    private Button bt_Post_req;
     private TextView tv_Get_req;
-    private TextView tv_Post_req;
 
     private FusedLocationProviderClient fusedLocationClient;
     private LocationRequest mLocationRequest;
@@ -125,9 +123,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         geofencingClient = LocationServices.getGeofencingClient(this);
         bt_Get_req =findViewById(R.id.btn_get_request);
-        bt_Post_req =findViewById(R.id.btn_post_request);
         tv_Get_req =findViewById(R.id.tv_get_request);
-        tv_Post_req =findViewById(R.id.tv_post_request);
 
         bt_Get_req.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,16 +132,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 getRequest();
             }
         });
-        
-        bt_Post_req.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(userloc!=null)
-                {
-                    postData();
-                }
-            }
-        });
+
     }
 
     private void fetchLastLocation() {
@@ -302,12 +289,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        tv_Post_req.setText("Post Data : "+response);
+                        Toast.makeText(MapsActivity.this, "Location sent to Hospital", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG,""+response);
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                tv_Post_req.setText("Response failed : "+error);
+                Toast.makeText(MapsActivity.this, "Error in Sending Location to Hospital", Toast.LENGTH_SHORT).show();
+                Log.d(TAG,""+error);
             }
         });
         requestQueue.add(jsonObjectRequest);
@@ -324,7 +313,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onResponse(String response) {
 
                 Log.d(TAG,"Clicked on button and response witing for Get request");
-                tv_Get_req.setText("Data : "+response);
+                tv_Get_req.setText(getString(R.string.Messageofquarantine) +
+                        getString(R.string.message2));
                 try {
                     JSONObject obj = new JSONObject(response);
                     Log.d("JSONObject",obj.toString());
@@ -374,8 +364,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Add a marker in Sydney and move the camera
         enableUserLocation();
 //        LatLng userishere = new LatLng(userloc.latitude, userloc.longitude);
-//        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userishere, 16));
-
 
 
         mMap.setOnMapLongClickListener(this);
@@ -499,6 +487,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     @Override
                     public void onSuccess(Void aVoid) {
                         Log.d(TAG, "onSuccess: Geofence Added...");
+                        if(geoloc!=null) {
+                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(geoloc, 18));
+                        }
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
