@@ -43,7 +43,7 @@ const Register = () => {
         console.log(reason);
       });
 
-    // history.push("/dashboard");
+    history.push("/dashboard");
   };
 
   const getLocation = (ev) => {

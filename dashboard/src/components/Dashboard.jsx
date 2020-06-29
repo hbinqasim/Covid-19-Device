@@ -15,15 +15,21 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    Axios.get(`${process.env.REACT_APP_SRV_URL}/patients`)
-      .then((value) => {
-        const list = value.data.data;
-        setPatientsList(list);
-        console.log(list);
-      })
-      .catch((reason) => {
-        console.log(reason);
-      });
+    const interval = setInterval(() => {
+      Axios.get(`${process.env.REACT_APP_SRV_URL}/patients`)
+        .then((value) => {
+          const list = value.data.data;
+          setPatientsList(list);
+          console.log(list);
+        })
+        .catch((reason) => {
+          console.log(reason);
+        });
+    }, 10000);
+
+    return () => {
+      clearInterval(interval);
+    };
   }, []);
 
   return (
@@ -37,12 +43,21 @@ const Dashboard = () => {
       >
         Add +
       </button>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          history.push("/map");
+        }}
+        className="btn btn-outline-dark btn-lg my-2"
+      >
+        Go to Map
+      </button>
       <table className="table">
         <thead className="thead-dark">
           <tr>
             <th scope="col">#</th>
             <th scope="col">Name</th>
-            <th scope="col">Location</th>
+            <th scope="col">Contact</th>
             <th scope="col">Status</th>
           </tr>
         </thead>
@@ -53,7 +68,7 @@ const Dashboard = () => {
                 <th scope="row">{index}</th>
                 <td>{value.name}</td>
                 <td>{value.contact}</td>
-                <td>@disconnected</td>
+                <td>@{value.status}</td>
               </tr>
             );
           })}

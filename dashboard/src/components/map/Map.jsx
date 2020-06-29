@@ -1,20 +1,11 @@
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from "google-maps-react";
 import React, { Component } from "react";
 import { style, mapStyle } from "./style";
-
-const locations = [
-  { lat: 31.522355, lng: 74.436162 },
-  { lat: 31.522335, lng: 74.43574 },
-  { lat: 31.522315, lng: 74.436162 },
-  { lat: 31.522345, lng: 74.43574 },
-  { lat: 31.522355, lng: 74.436172 },
-  { lat: 31.522335, lng: 74.43594 },
-  { lat: 31.524029, lng: 74.437116 },
-  { lat: 31.524095, lng: 74.437374 },
-  { lat: 31.527824, lng: 74.434982 },
-  { lat: 31.527796, lng: 74.42804 },
-  { lat: 31.521017, lng: 74.434363 },
-];
+import { useContext } from "react";
+import { useEffect } from "react";
+import Axios from "axios";
+import { useState } from "react";
+import IconMarker from "../../images/icon-marker.png";
 
 function _mapLoaded(mapProps, map) {
   map.setOptions({
@@ -23,7 +14,35 @@ function _mapLoaded(mapProps, map) {
 }
 
 const MapContainer = (props) => {
-  const onMarkerClick = () => {};
+  const [locationArray, setlocationArray] = useState([]);
+  const [showingInfoWindow, setshowingInfoWindow] = useState(false); //Hides or the shows the infoWindow
+  const [activeMarker, setactiveMarker] = useState({}); //Shows the active marker upon click
+  const [selectedPlace, setselectedPlace] = useState({});
+
+  const onMarkerClick = (props, marker, e) => {
+    setselectedPlace(props);
+    setactiveMarker(marker);
+    setshowingInfoWindow(true);
+  };
+
+  const onClose = (props) => {
+    if (showingInfoWindow) {
+      setshowingInfoWindow(false);
+      setactiveMarker(null);
+    }
+  };
+
+  useEffect(() => {
+    Axios.get(`${process.env.REACT_APP_SRV_URL}/patients`)
+      .then((value) => {
+        const array = value.data.data;
+        setlocationArray(array);
+      })
+      .catch((reason) => {
+        console.log(reason);
+      });
+  }, []);
+
   return (
     <Map
       google={props.google}
@@ -35,9 +54,54 @@ const MapContainer = (props) => {
       zoom={10}
       onReady={(mapProps, map) => _mapLoaded(mapProps, map)}
     >
-      {locations.map((value, index) => {
-        return <Marker key={index} position={value}></Marker>;
+      {locationArray.map((value, index) => {
+        return (
+          <Marker
+            // @ts-ignore
+            name={`Quarantine location of ${value.name}`}
+            onClick={onMarkerClick}
+            key={index}
+            position={{ lat: value.location.lat, lng: value.location.long }}
+            icon={{
+              url: IconMarker,
+              anchor: new window.google.maps.Point(32, 32),
+              scaledSize: new window.google.maps.Size(34, 34),
+            }}
+          ></Marker>
+        );
       })}
+      {locationArray.map((value, index) => {
+        return (
+          value.current_location && (
+            <Marker
+              // @ts-ignore
+              name={`Cuttent location of ${value.name}`}
+              onClick={onMarkerClick}
+              key={index}
+              position={{
+                lat: value.current_location.lat,
+                lng: value.current_location.long,
+              }}
+            ></Marker>
+          )
+        );
+      })}
+
+      <InfoWindow
+        // @ts-ignore
+        marker={activeMarker}
+        visible={showingInfoWindow}
+        onClose={onClose}
+      >
+        <div>
+          <h6>
+            {
+              // @ts-ignore
+              selectedPlace.name
+            }
+          </h6>
+        </div>
+      </InfoWindow>
     </Map>
   );
 };
