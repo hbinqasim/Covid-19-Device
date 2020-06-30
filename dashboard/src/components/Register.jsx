@@ -174,8 +174,8 @@ const MapContainer = (props) => {
       google={props.google}
       containerStyle={containerStyle}
       initialCenter={{
-        lat: 31.426618298569547,
-        lng: 74.17618259285724,
+        lat: 31.507987102231986,
+        lng: 74.34804170980331,
       }}
       zoom={15}
       onDblclick={maponDblclick}
