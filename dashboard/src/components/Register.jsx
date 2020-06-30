@@ -3,18 +3,8 @@ import { Link, useHistory } from "react-router-dom";
 import "axios";
 import { useState } from "react";
 import Axios from "axios";
-
-// Name:
-// CNIC:
-// Age:
-// Address:
-// Contact:
-// Registered location:
-// Device: {id of device, alloted by the hospital admin}
-// Status: {disconnected, normal, outOfBound }
-// Guardian Name:
-// Emergency contact:
-// Email:
+import { Map, GoogleApiWrapper, Marker, InfoWindow } from "google-maps-react";
+import { containerStyle } from "./map/style";
 
 const Register = () => {
   const history = useHistory();
@@ -25,6 +15,10 @@ const Register = () => {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [cordinates, setCordinates] = useState({ lat: 0, long: 0 });
+
+  const setmapCordinates = (props) => {
+    setCordinates({ lat: props.lat, long: props.long });
+  };
 
   const onClick = (ev) => {
     ev.preventDefault();
@@ -42,25 +36,26 @@ const Register = () => {
       .catch((reason) => {
         console.log(reason);
       });
-
-    history.push("/dashboard");
+    alert("Saved to database");
+    // history.push("/dashboard");
   };
 
-  const getLocation = (ev) => {
-    ev.preventDefault();
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const coords = position.coords;
-        setCordinates({ lat: coords.latitude, long: coords.longitude });
-      },
-      (error) => {
-        console.log(error);
-      },
-      { enableHighAccuracy: true }
-    );
-  };
+  // const getLocation = (ev) => {
+  //   ev.preventDefault();
+  //   navigator.geolocation.getCurrentPosition(
+  //     (position) => {
+  //       const coords = position.coords;
+  //       setCordinates({ lat: coords.latitude, long: coords.longitude });
+  //     },
+  //     (error) => {
+  //       console.log(error);
+  //     },
+  //     { enableHighAccuracy: true }
+  //   );
+  // };
+
   return (
-    <div className="container my-5">
+    <div className="container-fluid my-5">
       <h1 className="display-4 text-center my-5"> Patient Registration Form</h1>
       <div className="d-flex justify-content-center">
         <div className="col-md-6">
@@ -112,11 +107,20 @@ const Register = () => {
                   ></input>
                 </div>
                 {/* Location */}
-                <div className="form-group">
+                {/* <div className="form-group">
                   <label>Quarantine Location: </label>
                   <button className="btn btn-secondary" onClick={getLocation}>
                     Current Location
                   </button>
+                </div> */}
+                {/* MAP */}
+
+                <div>
+                  <label>Double Click on map to mark Quarantine Location</label>
+                  <GoogleMap
+                    cordinates={cordinates}
+                    setCordinates={setmapCordinates}
+                  />
                 </div>
                 {/* Phone Number */}
                 <div className="form-group">
@@ -155,4 +159,36 @@ const Register = () => {
     </div>
   );
 };
+
+const MapContainer = (props) => {
+  const maponDblclick = (mapProps, map, event) => {
+    const { latLng } = event;
+    const lat = latLng.lat();
+    const lng = latLng.lng();
+    console.log(lat, lng);
+    props.setCordinates({ lat: lat, long: lng });
+  };
+
+  return (
+    <Map
+      google={props.google}
+      containerStyle={containerStyle}
+      initialCenter={{
+        lat: 31.426618298569547,
+        lng: 74.17618259285724,
+      }}
+      zoom={15}
+      onDblclick={maponDblclick}
+    >
+      <Marker
+        position={{ lat: props.cordinates.lat, lng: props.cordinates.long }}
+      />
+    </Map>
+  );
+};
+
+const GoogleMap = GoogleApiWrapper({
+  apiKey: process.env.REACT_APP_API_KEY,
+})(MapContainer);
+
 export default Register;

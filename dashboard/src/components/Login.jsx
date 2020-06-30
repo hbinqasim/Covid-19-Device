@@ -41,7 +41,7 @@ const Login = () => {
                   }}
                   className="btn btn-dark btn-lg btn-block"
                 >
-                  Sign up
+                  Login
                 </button>
               </form>
             </div>

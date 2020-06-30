@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { useEffect } from "react";
 import Axios from "axios";
 import { useState } from "react";
+// @ts-ignore
 import IconMarker from "../../images/icon-marker.png";
 
 function _mapLoaded(mapProps, map) {

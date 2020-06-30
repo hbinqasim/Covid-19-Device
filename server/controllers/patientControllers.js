@@ -42,6 +42,7 @@ exports.createPatient = (req, res) => {
         status: "success",
         data: value,
       });
+      console.log("USER_ADDED_SUCCESS", req.body.name);
     })
     .catch((reason) => {
       res.status(400).json({

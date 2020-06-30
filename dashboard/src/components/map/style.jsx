@@ -165,4 +165,10 @@ const style = {
   height: "100%",
 };
 
-export { style, mapStyle };
+const containerStyle = {
+  position: "relative",
+  width: "100%",
+  height: "400px",
+};
+
+export { style, mapStyle, containerStyle };
